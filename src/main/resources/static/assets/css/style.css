@@ -1,0 +1,29 @@
+.main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.section {
+    flex: 1;
+}
+
+.footer {
+    padding: 1rem 1.5rem 2rem;
+}
+
+.overflowx-auto {
+    overflow-x: auto;
+}
+
+.mb-1 {
+    margin-top: 1rem;
+}
+
+th {
+  white-space: nowrap;
+}
+
+.nowordwrap {
+  white-space: nowrap;
+}

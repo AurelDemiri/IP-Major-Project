@@ -1,0 +1,74 @@
+<section class="section">
+  <h1 class="title">Week Menu Overzicht</h1>
+
+  <h3>Kies uw jaar:</h3>
+  <div class="field">
+    <div class="control">
+      <div class="select is-dark">
+        <select #jaarSelect (change)='onJaarChange(jaarSelect.value)'>
+          <option *ngFor="let item of numberArray(2018, 3)" [value]="item" [selected]="item == 2019">{{ item }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <h3>Kies uw weeknummer:</h3>
+  <div class="field">
+    <div class="control">
+      <div class="select is-dark">
+        <select #weeknummerSelect (change)='onWeeknummerChange(weeknummerSelect.value)'>
+          <option *ngFor="let item of numberArray(1, 52)" [value]="item" [selected]="item == 22">{{ item }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="dagmenus$?.length > 0" [ngIfElse]="noDagMenus">
+    <div style="overflow-x:auto">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="has-text-centered" *ngFor="let index of numberArray(0, 7)">
+              <div *ngIf="dagmenus$[index]">
+                {{ dagmenus$[index].datum }}<br />{{ dagmenus$[index].dag }}
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>SOEP</b></td>
+            <td class="has-text-centered" *ngFor="let index of numberArray(0, 7)">
+              <div *ngIf="dagmenus$[index]">
+                {{ dagmenus$[index].soep.beschrijving }}<br/>&euro; {{ dagmenus$[index].soep.prijs | number: '1.2-2' }}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><b>DAGSCHOTEL</b></td>
+            <td class="has-text-centered" *ngFor="let index of numberArray(0, 7)">
+              <div *ngIf="dagmenus$[index]">
+                {{ dagmenus$[index].dagschotel.beschrijving }}
+                <br/>&euro; {{ dagmenus$[index].dagschotel.prijs | number: '1.2-2' }}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><b>VEGGIE</b></td>
+            <td class="has-text-centered" *ngFor="let index of numberArray(0, 7)">
+              <div *ngIf="dagmenus$[index]">
+                {{ dagmenus$[index].veggie.beschrijving }}
+                <br/>&euro; {{ dagmenus$[index].veggie.prijs | number: '1.2-2' }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+
+  <ng-template #noDagMenus>
+    <p>Er is geen weekmenu voor de gekozen weeknummer-jaar combinatie</p>
+  </ng-template>
+</section>
